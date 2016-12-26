@@ -13,19 +13,28 @@ desires.
 
 ##WORKING
 
-1) Input : File containing the code is opened in read mode.
-2) Create Symbol Table : For generating name and position links
-3) Acquiring new replacement names
-4) Check occurrences and addresses of the variables
-5) Check if the user has used a legal identifier name
-6) Replace the old name with the new name
+* Input : File containing the code is opened in read mode.
+
+* Create Symbol Table : For generating name and position links
+
+* Acquiring new replacement names
+
+* Check occurrences and addresses of the variables
+
+* Check if the user has used a legal identifier name
+
+* Replace the old name with the new name
 
 ## DETAILS
 The symbol table that our program generates uses ​
 **structures** and has the following three useful attributes:-
-1) Variable Name
-2) Primitive data type of variable
-3) Addresses of occurrences
+
+* Variable Name
+
+* Primitive data type of variable
+
+* Addresses of occurrences
+
 Apart from this, various other cases were accounted for while generating an ideal
 symbol table. For instance, the scope of the various variables. For dealing with the
 three types of scopes of a typical C program ( local scope, global scope and function
@@ -43,16 +52,72 @@ user which follows the required conventions we apply a sequence of various
 new output file with the required names of the variables that is needed by the
 user.
 
-##SCREENS
+##Example
 
-1) Testing Code for the main program
+###### Testing Code for the main program ######
+```
 
-![alt tag](/SCREENS/1.png)
+#include<stdio.h>
+void foo(int,int);
+int fact(int);
+int power(int,int);
+int main()
+{
+	int temp1=5,temp2=10;
+	foo(temp2,temp1);
+	foo(fact(temp2),pow(temp2,temp1));
+}
+void foo(int x,int y)
+{
+	printf("%d %d\n",x,y);
+}
+int fact(int n)
+{
+	if(n <=1)
+		return 1;
+	return n*fact(n-1);
+}
+int power(int m,int n)
+{
+	if(n==1)
+	return m;
+	return m*power(m,n-1);
+}
 
-2) Representation of the Symbol Table for the above code.
+```
+###### Representation of the Symbol Table for the above code. ######
 
 ![alt tag](/SCREENS/2.png)
 
-3) Representation of the Code after replacement
+###### Representation of the Code after replacement ######
 
-![alt tag](/SCREENS/3.png)
+```
+
+#include<stdio.h>
+void foo(int,int);
+int fact(int);
+int power(int,int);
+int main()
+{
+	int a=5,b=10;
+	foo(b,a);
+	foo(fact(b),pow(b,a));
+}
+void foo(int c,int d)
+{
+	printf("%d %d\n",c,d);
+}
+int fact(int e)
+{
+	if(e <=1)
+		return 1;
+	return e*fact(e-1);
+}
+int power(int f,int g)
+{
+	if(e==1)
+	return f;
+	return f*power(f,g-1);
+}
+
+```
